@@ -14,7 +14,7 @@ const LoginPage = ({ currentPage, setCurrentPage } : any) => (
 const SignUpPage = ({ currentPage, setCurrentPage } : any) => (
   <div>
     <button onClick={() => setCurrentPage('Login')}>
-        go to Login
+        go to Login!
     </button>
   </div>
 );
