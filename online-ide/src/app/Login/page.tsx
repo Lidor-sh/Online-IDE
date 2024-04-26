@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 const LoginPage = ({ currentPage, setCurrentPage } : any) => (
   <div>
     <button onClick={() => setCurrentPage('SignUp')}>
-        go to SignUp
+        go to SignUp!
     </button>
   </div>
 );
