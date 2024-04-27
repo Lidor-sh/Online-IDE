@@ -5,16 +5,7 @@ import backImage from "../images/background2.jpg";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState('Login');
-  const [showTransition, setShowTransition] = useState(false);
   const [currActive, setCurrentActive] = useState('Login');
-
-  useEffect(() => {
-    setShowTransition(true);
-    const timeout = setTimeout(() => {
-      setShowTransition(false);
-    }, 2000); // Adjust the timeout to match your CSS transition duration
-    return () => clearTimeout(timeout);
-  }, [currentPage]);
 
   const LoginPage = () => (
     <div className="login-container">
@@ -93,8 +84,7 @@ const Page = () => {
     <>
       <div className="container">
         <div className="box">
-          {showTransition && <div className="transition-overlay"></div>}
-          <div className={`content ${showTransition ? 'transitioning' : ''}`} style={{ transform: `translateX(${currActive === 'Login' ? '0%' : '25%'})` }}>
+          <div className="content" style={{ transform: `translateX(${currActive === 'Login' ? '0%' : '25%'})` }}>
             {currentPage === 'Login' ? <LoginPage /> : <SignUpPage />}
           </div>
           <Image
