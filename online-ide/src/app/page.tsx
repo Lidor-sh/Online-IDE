@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <main>
-      Hello world
+      Welcome to the Online IDE
     </main>
   );
 }
