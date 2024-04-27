@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@prisma/client": "^5.13.0",
     "@tailwindcss/typography": "^0.5.12",
     "daisyui": "^4.10.2",
     "next": "^14.2.3",
@@ -7,11 +8,14 @@
     "node.js": "^0.0.1-security"
   },
   "devDependencies": {
-    "nodemon": "^3.1.0"
+    "@types/node": "^20.12.7",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
   },
   "scripts": {
     "dev": "nodemon --watch src -e js,jsx,ts,tsx,json --exec \"npm run start\"",
     "start": "next dev"
   }
-
 }
