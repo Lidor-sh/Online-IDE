@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import backImage from "../images/background.jpg";
+import backImage from "../images/background2.jpg";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState('Login');
