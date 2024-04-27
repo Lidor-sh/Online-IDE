@@ -1,34 +1,97 @@
-@import 'tailwindcss/base';
-@import 'tailwindcss/components';
-@import 'tailwindcss/utilities';
-
-
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+*, *::before, *::after {
+  box-sizing: inherit;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #222831; 
+}
+
+.login-container, .signup-container {
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  background-color: #31363F;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4); 
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #EEEEEE;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #76ABAE;
+  border-radius: 6px;
+  background-color: #31363F;
+  color: #EEEEEE;
+}
+
+.button {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  background-color: #76ABAE;
+  color: #EEEEEE;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: #5B8488;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: #76ABAE;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+}
+
+.forgot-password {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #CCCCCC;
+}
+
+.forgot-password:hover {
+  color: #999999;
+  text-decoration: underline;
+}
+
+.login-instead {
+  margin-top: 20px;
+}
+
+.a {
+  color: #76ABAE;
 }
