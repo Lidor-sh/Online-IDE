@@ -23,12 +23,15 @@ const Page = () => {
           </div>
           <button type="submit" className="button">Sign in</button>
           <div className="forgot-password">
-            <a href="#">Forgot password?</a>
+            <a href="#" className="forgot-password">Forgot password?</a>
           </div>
         </form>
         <div className="create-account">
           Don't have an account? <button onClick={() => setCurrentPage('SignUp')} className="link">Create account</button>
         </div>
+      </div>
+      <div className="social-login-container">
+        {/* Social login buttons */}
       </div>
     </div>
   );
@@ -55,6 +58,9 @@ const Page = () => {
         <div className="login-instead">
           Already have an account? <button onClick={() => setCurrentPage('Login')} className="link">Sign in</button>
         </div>
+      </div>
+      <div className="social-login-container">
+        {/* Social login buttons */}
       </div>
     </div>
   );

@@ -79,8 +79,19 @@ h2 {
 
 .forgot-password {
   margin-top: 10px;
+  font-size: 14px;
+  color: #CCCCCC;
+}
+
+.forgot-password:hover {
+  color: #999999;
+  text-decoration: underline;
 }
 
 .login-instead {
   margin-top: 20px;
+}
+
+.a {
+  color: #76ABAE;
 }
