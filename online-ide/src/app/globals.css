@@ -25,6 +25,7 @@ body {
   background-color: #76ABAE;
   border-radius: 8px;
   position: absolute;
+  transition: 2s ease-in-out;
 }
 
 .box {
