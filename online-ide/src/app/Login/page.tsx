@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import backImage from "../images/background2.jpg";
+import { signIn } from 'next-auth/react';
+import { GithubSignInButton, GithubSignUpButton, GoogleSignInButton, GoogleSignUpButton } from '../components/authButtons';
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState('Login');
@@ -40,8 +42,8 @@ const Page = () => {
       </div>
       <hr/>
       <div className="social-login-container">
-        <button type="button" className="login-with-google-btn" >Sign in with Google</button>
-        <button type="button" className="login-with-github-btn" >Sign in with Github</button>
+        <GoogleSignInButton />
+        <GithubSignInButton />
       </div>
     </div>
   );
@@ -74,8 +76,8 @@ const Page = () => {
       </div>
       <hr/>
       <div className="social-login-container">
-        <button type="button" className="login-with-google-btn" >Sign in with Google</button>
-        <button type="button" className="login-with-github-btn" >Sign in with Github</button>
+        <GoogleSignUpButton />
+        <GithubSignUpButton />
       </div>
     </div>
   );
