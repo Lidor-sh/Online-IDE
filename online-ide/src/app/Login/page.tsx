@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import backImage from "../images/background2.jpg";
-import { useSession } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import {
   GithubSignInButton,
   GithubSignUpButton,
@@ -23,10 +23,16 @@ const Page = () => {
     console.log("Not signed in", session);
   }
 
+  const signInCred = async (fromData: FormData) => {
+    const email = fromData.get("email");
+    const password = fromData.get("password");
+    signIn("credentials", { email, password });
+  };
+
   const LoginPage = () => (
     <div className="login-container">
       <h2 className="login-header">Sign in</h2>
-      <form className="form">
+      <form className="form" action={signInCred}>
         <div className="form-group">
           {/*<label htmlFor="email">Email</label>*/}
           <input

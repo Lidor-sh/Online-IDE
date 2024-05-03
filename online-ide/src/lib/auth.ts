@@ -16,5 +16,28 @@ export const  authOptions = {
             clientId: process.env.GITHUB_CLIENT_ID!,
             clientSecret: process.env.GITHUB_CLIENT_SECRET!
         }),
+        CredentialsProvider({
+            type: 'credentials',
+            credentials: {
+                email: { 
+                    label: 'Email',
+                    type: 'email',
+                    placeholder: 'Email'
+                },
+                password: {
+                    label: 'Password',
+                    type: 'password',
+                },
+            },
+            authorize(credentials, req) {
+                const { email, password} = credentials as {
+                    email: string;
+                    password: string;
+                };
+
+                //perform login logic
+                return {id: '1234', name: 'Lidor', email};
+            },
+        }),
     ]
 }
