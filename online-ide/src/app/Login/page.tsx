@@ -9,17 +9,16 @@ import {
   GoogleSignInButton,
   GoogleSignUpButton,
 } from "../components/authButtons";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState("Login");
   const [currActive, setCurrentActive] = useState("Login");
   const { data: session } = useSession();
-  const router = useRouter();
 
   if (session) {
     console.log("Signed in as ", session);
-    router.push("../Projects/");
+    redirect("../Projects/");
   } else {
     console.log("Not signed in", session);
   }
@@ -50,7 +49,12 @@ const Page = () => {
         </div>
         <div className="login-footer">
           <div className="form-group remember-me">
-            <input type="checkbox" id="remember" name="remember" />
+            <input
+              type="checkbox"
+              id="remember"
+              name="remember"
+              className="bg-white"
+            />
             <label htmlFor="remember" className="remember-me">
               Remember me
             </label>
@@ -146,7 +150,7 @@ const Page = () => {
   );
   return (
     <>
-      <div className="container">
+      <div className="container max-w-full max-h-full ">
         <div className="box">
           <div
             className="content"
@@ -159,7 +163,7 @@ const Page = () => {
           <Image
             src={backImage}
             alt="background"
-            className="background-image"
+            className="background-image overflow-hidden"
           />
         </div>
       </div>
