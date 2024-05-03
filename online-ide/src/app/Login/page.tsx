@@ -53,7 +53,7 @@ const Page = () => {
               type="checkbox"
               id="remember"
               name="remember"
-              className="bg-white"
+              className="h-4 w-4 accent-white  bg-grey-700 text-blacktheme  rounded cursor-pointer"
             />
             <label htmlFor="remember" className="remember-me">
               Remember me
