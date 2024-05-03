@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        blacktheme: "#222831",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
@@ -16,6 +19,7 @@ const config: Config = {
     },
   },
   plugins: [
+    require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
     require("daisyui")
   ],
