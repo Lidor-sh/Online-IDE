@@ -11,6 +11,7 @@ const handleSignIn = (method: string) => {
             signIn("github");
             break;
     }
+    console.log("Signing in performed");
 }
 
 export function GoogleSignInButton() {

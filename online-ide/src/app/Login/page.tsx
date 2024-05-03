@@ -2,12 +2,21 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import backImage from "../images/background2.jpg";
-import { signIn } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { GithubSignInButton, GithubSignUpButton, GoogleSignInButton, GoogleSignUpButton } from '../components/authButtons';
+import { redirect } from 'next/navigation';
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState('Login');
   const [currActive, setCurrentActive] = useState('Login');
+  const { data: session} = useSession();
+
+  if (session) {
+    console.log('Signed in as ', session);
+    redirect('../Projects/');
+  }else{
+    console.log('Not signed in', session);
+  }
 
   const LoginPage = () => (
     <div className="login-container">
@@ -81,7 +90,6 @@ const Page = () => {
       </div>
     </div>
   );
-
   return (
     <>
       <div className="container">
