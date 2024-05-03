@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
 import backImage from "../images/background2.jpg";
 import { signIn, useSession } from "next-auth/react";
@@ -10,6 +10,8 @@ import {
   GoogleSignUpButton,
 } from "../components/authButtons";
 import { redirect } from "next/navigation";
+import { PassThrough } from "stream";
+import toast from "react-hot-toast";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState("Login");
@@ -23,18 +25,49 @@ const Page = () => {
     console.log("Not signed in", session);
   }
 
-  const signInCred = async (fromData: FormData) => {
-    const email = fromData.get("email");
-    const password = fromData.get("password");
-    signIn("credentials", { email, password });
+  const signUpCred = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fromData = new FormData(e.currentTarget);
+    const signUpData = {
+      username: fromData.get("username"),
+      email: fromData.get("email"),
+      password: fromData.get("password"),
+    };
+
+    // TODO: check if user is already signed
+
+    // TODO: if user is already signed perform an error
+
+    // TODO: if user is not signed, sign him up and than sign him in
+
+    // if user.exists() ? throw error : user.signup and signin()
+  };
+
+  const signInCred = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fromData = new FormData(e.currentTarget);
+    const loginData = {
+      email: fromData.get("email"),
+      password: fromData.get("password"),
+      callbackUrl: "/",
+      redirect: false,
+    };
+    const login = await signIn("credentials", loginData);
+
+    console.log(login);
+
+    if (login && login.ok) {
+      toast.success("Login successful");
+    } else {
+      toast.error("Wrong email or password");
+    }
   };
 
   const LoginPage = () => (
     <div className="login-container">
       <h2 className="login-header">Sign in</h2>
-      <form className="form" action={signInCred}>
+      <form className="form space-y-2" onSubmit={signInCred}>
         <div className="form-group">
-          {/*<label htmlFor="email">Email</label>*/}
           <input
             name="email"
             type="email"
@@ -44,7 +77,6 @@ const Page = () => {
           />
         </div>
         <div className="form-group">
-          {/*<label htmlFor="password">Password</label>*/}
           <input
             name="password"
             type="password"
@@ -99,11 +131,10 @@ const Page = () => {
   const SignUpPage = () => (
     <div className="signup-container">
       <h2 className="signup-header">Sign up</h2>
-      <form className="form">
+      <form className="form space-y-2">
         <div className="form-group">
-          {/*<label htmlFor="name">Name</label>*/}
           <input
-            name="name"
+            name="username"
             type="text"
             className="form-control"
             placeholder="Username"
@@ -111,7 +142,6 @@ const Page = () => {
           />
         </div>
         <div className="form-group">
-          {/*<label htmlFor="email">Email</label>*/}
           <input
             name="email"
             type="email"
@@ -121,7 +151,6 @@ const Page = () => {
           />
         </div>
         <div className="form-group">
-          {/*<label htmlFor="password">Password</label>*/}
           <input
             name="password"
             type="password"

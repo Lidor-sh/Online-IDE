@@ -36,7 +36,10 @@ export const  authOptions = {
                 };
 
                 //perform login logic
-                return {id: '1234', name: 'Lidor', email};
+                if (email === "lidorschool3@gmail.com" && password === "123456789")
+                    return {id: '1234', name: 'Lidor', email};
+                else
+                    return null;
             },
         }),
     ]

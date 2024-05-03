@@ -1,14 +1,16 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import toast from "react-hot-toast";
 
-const handleSignIn = (method: string) => {
+const handleSignIn = async (method: string) => {
+  var login;
   switch (method) {
     case "google":
-      signIn("google");
+      login = await signIn("google");
       break;
     case "github":
-      signIn("github");
+      login = await signIn("github");
       break;
   }
   console.log("Signing in performed");
