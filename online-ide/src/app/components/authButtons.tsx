@@ -20,11 +20,9 @@ export function GoogleSignInButton() {
   return (
     <button
       type="button"
-      className="login-with-google-btn"
+      className="login-with-google-btn w-10 h-10 rounded-full"
       onClick={() => handleSignIn("google")}
-    >
-      Sign in with Google
-    </button>
+    ></button>
   );
 }
 
@@ -32,11 +30,9 @@ export function GithubSignInButton() {
   return (
     <button
       type="button"
-      className="login-with-github-btn"
+      className="login-with-github-btn w-10 h-10 rounded-full"
       onClick={() => handleSignIn("github")}
-    >
-      Sign in with Github
-    </button>
+    ></button>
   );
 }
 
@@ -44,11 +40,9 @@ export function GoogleSignUpButton() {
   return (
     <button
       type="button"
-      className="login-with-google-btn"
+      className="login-with-google-btn w-10 h-10 rounded-full"
       onClick={() => handleSignIn("google")}
-    >
-      Sign up with Google
-    </button>
+    ></button>
   );
 }
 
@@ -56,10 +50,8 @@ export function GithubSignUpButton() {
   return (
     <button
       type="button"
-      className="login-with-github-btn"
+      className="login-with-github-btn w-10 h-10 rounded-full"
       onClick={() => handleSignIn("github")}
-    >
-      Sign up with Github
-    </button>
+    ></button>
   );
 }

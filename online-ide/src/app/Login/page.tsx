@@ -121,7 +121,7 @@ const Page = () => {
         </button>
       </div>
       <hr />
-      <div className="social-login-container">
+      <div className="social-login-container flex justify-center items-center space-x-2">
         <GoogleSignInButton />
         <GithubSignInButton />
       </div>
@@ -177,7 +177,7 @@ const Page = () => {
         </button>
       </div>
       <hr />
-      <div className="social-login-container">
+      <div className="social-login-container flex justify-center items-center space-x-2">
         <GoogleSignUpButton />
         <GithubSignUpButton />
       </div>
