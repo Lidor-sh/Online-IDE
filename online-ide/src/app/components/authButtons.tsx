@@ -3,7 +3,6 @@
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 
-
 const handleSignIn = async (method: string) => {
   var login;
   switch (method) {
@@ -18,6 +17,9 @@ const handleSignIn = async (method: string) => {
       break;
     case "linkedin":
       login = await signIn("linkedin");
+      break;
+    case "facebook":
+      login = await signIn("facebook");
       break;
   }
   console.log("Signing in performed");
@@ -45,6 +47,17 @@ export function GithubSignInButton() {
   );
 }
 
+export function FacebookSignInButton() {
+  return (
+    <button
+      type="button"
+      className="login-btn w-10 h-10 rounded-full"
+      id="facebook-icon"
+      onClick={() => handleSignIn("facebook")}
+    ></button>
+  );
+}
+
 export function DiscordSignUpButton() {
   return (
     <button
@@ -57,7 +70,7 @@ export function DiscordSignUpButton() {
 }
 
 export function LinkedInSignUpButton() {
-  return (     
+  return (
     <button
       type="button"
       className="login-btn w-10 h-10 rounded-full"

@@ -7,7 +7,8 @@ import {
   GithubSignInButton,
   GoogleSignInButton,
   DiscordSignUpButton,
-  LinkedInSignUpButton
+  LinkedInSignUpButton,
+  FacebookSignInButton,
 } from "../components/authButtons";
 import { redirect } from "next/navigation";
 import { PassThrough } from "stream";
@@ -125,7 +126,7 @@ const Page = () => {
         <GoogleSignInButton />
         <GithubSignInButton />
         <DiscordSignUpButton />
-        <LinkedInSignUpButton />
+        <FacebookSignInButton />
       </div>
     </div>
   );
@@ -183,7 +184,7 @@ const Page = () => {
         <GoogleSignInButton />
         <GithubSignInButton />
         <DiscordSignUpButton />
-        <LinkedInSignUpButton />
+        <FacebookSignInButton />
       </div>
     </div>
   );
