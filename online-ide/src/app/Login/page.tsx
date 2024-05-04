@@ -5,9 +5,9 @@ import backImage from "../images/background2.jpg";
 import { signIn, useSession } from "next-auth/react";
 import {
   GithubSignInButton,
-  GithubSignUpButton,
   GoogleSignInButton,
-  GoogleSignUpButton,
+  DiscordSignUpButton,
+  LinkedInSignUpButton
 } from "../components/authButtons";
 import { redirect } from "next/navigation";
 import { PassThrough } from "stream";
@@ -124,6 +124,8 @@ const Page = () => {
       <div className="social-login-container flex justify-center items-center space-x-2">
         <GoogleSignInButton />
         <GithubSignInButton />
+        <DiscordSignUpButton />
+        <LinkedInSignUpButton />
       </div>
     </div>
   );
@@ -178,8 +180,10 @@ const Page = () => {
       </div>
       <hr />
       <div className="social-login-container flex justify-center items-center space-x-2">
-        <GoogleSignUpButton />
-        <GithubSignUpButton />
+        <GoogleSignInButton />
+        <GithubSignInButton />
+        <DiscordSignUpButton />
+        <LinkedInSignUpButton />
       </div>
     </div>
   );

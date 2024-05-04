@@ -3,6 +3,7 @@
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
 
+
 const handleSignIn = async (method: string) => {
   var login;
   switch (method) {
@@ -12,6 +13,12 @@ const handleSignIn = async (method: string) => {
     case "github":
       login = await signIn("github");
       break;
+    case "discord":
+      login = await signIn("discord");
+      break;
+    case "linkedin":
+      login = await signIn("linkedin");
+      break;
   }
   console.log("Signing in performed");
 };
@@ -20,7 +27,8 @@ export function GoogleSignInButton() {
   return (
     <button
       type="button"
-      className="login-with-google-btn w-10 h-10 rounded-full"
+      className="login-btn w-10 h-10 rounded-full"
+      id="google-icon"
       onClick={() => handleSignIn("google")}
     ></button>
   );
@@ -30,28 +38,32 @@ export function GithubSignInButton() {
   return (
     <button
       type="button"
-      className="login-with-github-btn w-10 h-10 rounded-full"
+      className="login-btn w-10 h-10 rounded-full"
+      id="github-icon"
       onClick={() => handleSignIn("github")}
     ></button>
   );
 }
 
-export function GoogleSignUpButton() {
+export function DiscordSignUpButton() {
   return (
     <button
       type="button"
-      className="login-with-google-btn w-10 h-10 rounded-full"
-      onClick={() => handleSignIn("google")}
+      className="login-btn w-10 h-10 rounded-full"
+      id="discord-icon"
+      onClick={() => handleSignIn("discord")}
     ></button>
   );
 }
 
-export function GithubSignUpButton() {
-  return (
+export function LinkedInSignUpButton() {
+  return (     
     <button
       type="button"
-      className="login-with-github-btn w-10 h-10 rounded-full"
-      onClick={() => handleSignIn("github")}
+      className="login-btn w-10 h-10 rounded-full"
+      id="linkedIn-icon"
+      onClick={() => handleSignIn("linkedin")}
     ></button>
   );
 }
+
