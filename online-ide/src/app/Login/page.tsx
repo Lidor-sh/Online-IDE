@@ -13,6 +13,7 @@ import {
 import { redirect } from "next/navigation";
 import { PassThrough } from "stream";
 import toast from "react-hot-toast";
+import { fetchUser, isUserExist, updateUser } from "@/lib/actions/user.action";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState("Login");
@@ -30,18 +31,33 @@ const Page = () => {
     e.preventDefault();
     const fromData = new FormData(e.currentTarget);
     const signUpData = {
-      username: fromData.get("username"),
-      email: fromData.get("email"),
-      password: fromData.get("password"),
+      username: fromData.get("username") as string,
+      password: fromData.get("password") as string,
+      email: fromData.get("email") as string,
+      loginMethod: "Credentials",
+      profilePicture: "Default",
     };
 
-    // TODO: check if user is already signed
-
-    // TODO: if user is already signed perform an error
-
-    // TODO: if user is not signed, sign him up and than sign him in
+    // TODO: check if user is already Signed
 
     // if user.exists() ? throw error : user.signup and signin()
+    if ((await isUserExist(signUpData.email)).exist) {
+      // TODO: if user is already signed perform an error
+      toast.error("Email is already taken");
+    } else {
+      // TODO: if user is not signed, sign him up and than sign him in
+      await updateUser(signUpData);
+      toast.error("Email is already taken");
+      const login = await signIn("credentials", signUpData);
+
+      console.log(login);
+
+      if (login && login.ok) {
+        toast.success("Login successful");
+      } else {
+        toast.error("Wrong email or password");
+      }
+    }
   };
 
   const signInCred = async (e: FormEvent<HTMLFormElement>) => {
@@ -134,7 +150,7 @@ const Page = () => {
   const SignUpPage = () => (
     <div className="signup-container">
       <h2 className="signup-header">Sign up</h2>
-      <form className="form space-y-2">
+      <form className="form space-y-2" onSubmit={signUpCred}>
         <div className="form-group">
           <input
             name="username"
