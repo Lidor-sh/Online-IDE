@@ -1,10 +1,11 @@
 import GithubProvider from "next-auth/providers/github";
 import GoogleProvider from "next-auth/providers/google";
-import LinkedInProvider from "next-auth/providers/linkedin";
 import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
-import { fetchUser } from "./actions/user.action";
+import { fetchUser, updateUser } from "./actions/user.action";
+import bcrypt from "bcrypt";
+import { STATUS_CODES } from "http";
 
 export const authOptions = {
   // Configure one or more authentication providers
@@ -50,7 +51,14 @@ export const authOptions = {
         //perform login logic
         const userInfo = await fetchUser(email);
         console.log(userInfo);
-        if (userInfo.email === email && userInfo.password === password)
+        if (userInfo.loginMethod !== "Credentials") {
+          throw new Error("Access denied");
+        }
+        const isPasswordEqual = await bcrypt.compare(
+          password,
+          userInfo.password
+        );
+        if (userInfo.email === email && isPasswordEqual)
           return {
             id: userInfo._id,
             name: userInfo.username,
@@ -64,4 +72,30 @@ export const authOptions = {
       },
     }),
   ],
+  callbacks: {
+    async signIn({ user, account, profile }: any) {
+      if (account.provider === "credentials") return true;
+      const email = profile.email || user.email;
+      const userInfo = await fetchUser(email);
+      if (userInfo) {
+        if (userInfo.loginMethod === account.provider) return true;
+        else false;
+      } else {
+        const data = {
+          username: user.name,
+          password: "-1",
+          email: email,
+          loginMethod: account.provider,
+          profilePicture: user.image,
+        };
+        await updateUser(data);
+        return true;
+      }
+    },
+  },
+  pages: {
+    signIn: "/Login",
+    signUp: "/Login",
+    error: "/Login",
+  },
 };

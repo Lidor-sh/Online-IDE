@@ -1,13 +1,14 @@
 "use client";
 
 import { signOut, useSession } from "next-auth/react";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export default function Page() {
   const { data: session } = useSession();
+  const router = useRouter();
 
   if (!session) {
-    redirect("../Login");
+    router.push("../Login");
   } else {
     return (
       <>

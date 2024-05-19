@@ -1,8 +1,8 @@
 "use server";
 
-import { BlobOptions } from "buffer";
 import User from "../models/user.model";
 import { connectToDB } from "../mogoose";
+import bcrypt from "bcrypt";
 
 interface Params {
   username: string;
@@ -21,11 +21,12 @@ export async function updateUser({
 }: Params): Promise<void> {
   connectToDB();
   try {
+    const hashedPassword = await bcrypt.hash(password, 10);
     await User.findOneAndUpdate(
       { email: email },
       {
         username: username.toLowerCase(),
-        password,
+        password: hashedPassword,
         loginMethod,
         profilePicture,
       },

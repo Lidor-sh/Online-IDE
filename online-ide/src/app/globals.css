@@ -78,13 +78,12 @@ hr {
 }
 
 .login-header, .signup-header {
-  margin-top: -1px;
-  margin-bottom: 20px;
   color: #222831;
   font-family: monospace;
   font-weight: bold;
   font-size: 250%;
   text-align: center;
+  vertical-align: middle;
 }
 
 
@@ -160,7 +159,6 @@ input::placeholder {
 }
 
 .forgot-password {
-  margin-top: 1%;
   font-size: 14px;
   color: #EEEEEE;
   font-family: monospace;
