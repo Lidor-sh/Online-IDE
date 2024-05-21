@@ -28,6 +28,10 @@ const Page = () => {
       toast.error("This email is used in another login method");
       setHasShownAlert(true);
     }
+    if (searchParams.get("msg") === "signup") {
+      setCurrentActive("SignUp");
+      setCurrentPage("SignUp");
+    }
   }, [hasShownAlert]);
 
   if (session) {
