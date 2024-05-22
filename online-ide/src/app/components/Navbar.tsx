@@ -5,13 +5,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import menuIcon from "../images/menu-icon.png";
 import closeIcon from "../images/close-icon.png";
-import { BackgroundCircles, HamburgerMenu, Rings } from "./NavDesign";
+import { HamburgerMenu } from "./design/Navbar";
+import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
 const Navbar = () => {
   const [openNavigation, setOpenNavigation] = useState(false);
   const router = useRouter();
 
   const moveToLogin = (method: string) => {
+    enablePageScroll();
     method === "#signin"
       ? router.push("Login?msg=login")
       : router.push("Login?msg=signup");
@@ -19,9 +21,13 @@ const Navbar = () => {
 
   const toggleNavigation = () => {
     setOpenNavigation(!openNavigation);
+    !openNavigation ? disablePageScroll() : enablePageScroll();
   };
 
   const handleClick = () => {
+    if (!openNavigation) return;
+
+    enablePageScroll();
     setOpenNavigation(false);
   };
 

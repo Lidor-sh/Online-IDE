@@ -10,7 +10,6 @@ import {
   DiscordSignUpButton,
   FacebookSignInButton,
 } from "../components/authButtons";
-import { redirect, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
 import { signInCred, signUpCred } from "../controllers/loginController";
 import { useRouter } from "next/navigation";

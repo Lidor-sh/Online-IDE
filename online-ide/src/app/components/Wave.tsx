@@ -1,6 +1,9 @@
-function Wave() {
+interface Promps {
+  className?: string;
+}
+const Wave = ({ className }: Promps) => {
   return (
-    <div className="wave">
+    <div className={`wave ${className || ""}`}>
       <svg
         data-name="Layer 1"
         xmlns="http://www.w3.org/2000/svg"
@@ -14,6 +17,6 @@ function Wave() {
       </svg>
     </div>
   );
-}
+};
 
 export default Wave;

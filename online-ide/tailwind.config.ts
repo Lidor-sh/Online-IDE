@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
 
 const config: Config = {
   content: [
@@ -13,10 +14,26 @@ const config: Config = {
         whitetheme: "#EEEEEE",
         middletheme: "#76ABAE",
       },
+      fontFamily: {
+        code: "var(--font-code)",
+        grotesk: "var(--font-grotesk)",
+      },
+      spacing: {
+        0.25: "0.0625rem",
+        7.5: "1.875rem",
+        15: "3.75rem",
+      },
+      zIndex: {
+        1: "1",
+        2: "2",
+        3: "3",
+        4: "4",
+        5: "5",
+      },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "radial-gradient": "radial-gradient(var(--tw-gradient-stops))",
+        "conic-gradient":
+          "conic-gradient(from 225deg, #FFC876, #79FFF7, #9F53FF, #FF98E2, #FFC876)",
       },
     },
   },

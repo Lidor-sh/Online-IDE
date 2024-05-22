@@ -1,5 +1,5 @@
 import Image from "next/image";
-import background from "../images/background1.jpg";
+import background from "../../images/background1.jpg";
 
 export const BackgroundCircles = () => {
   return (
