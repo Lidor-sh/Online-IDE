@@ -1,12 +1,18 @@
 import Image from "next/image";
-import { Gradient, Rings } from "./design/Hero";
+import { BackgroundCircles, Gradient, Rings } from "./design/Hero";
 import Section from "./Section";
 import heroImage from "../images/robot.jpg";
+import { useRef } from "react";
+import { ScrollParallax } from "react-just-parallax";
+import { heroIcons } from "../constants/Hero";
+import Notification from "./Notification";
 
 const Hero = () => {
+  const parallaxRef = useRef(null);
+
   return (
     <Section className="pt-[12rem] -mt-[5.25rem]" id="hero">
-      <div className="container-hero relative">
+      <div className="container-hero relative" ref={parallaxRef}>
         <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6rem]">
           <h1 className="h1 mb-6 text-blacktheme">
             Collaborate in Real-Time, Code Seamlessly Together!
@@ -29,15 +35,31 @@ const Hero = () => {
                 src={heroImage}
                 alt="hero image"
                 className="w-full scale-[1.7] translate-y-[8%] md:scale-[1] md:-translate-y-[10%] lg:-translate-y-[23%]"
-                width={1440}
-                height={1800}
+                width={1024}
+                height={490}
               />
+              <ScrollParallax isAbsolutelyPositioned strength={0.3}>
+                <ul className="hidden absolute -left-[5.5rem] bottom-[7.5rem] px-1 py-1 bg-slate-500/40 backdrop-blur border border-slate-700/10 rounded-2xl xl:flex">
+                  {heroIcons.map((icon, index) => (
+                    <li className="p-5" key={index}>
+                      <Image src={icon} width={24} height={25} alt={icon} />
+                    </li>
+                  ))}
+                </ul>
+              </ScrollParallax>
+
+              <ScrollParallax isAbsolutelyPositioned strength={0.3}>
+                <Notification
+                  className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
+                  title="Code submitted"
+                />
+              </ScrollParallax>
             </div>
           </div>
           <Gradient />
         </div>
+        <BackgroundCircles />
       </div>
-      <Rings />
     </Section>
   );
 };
