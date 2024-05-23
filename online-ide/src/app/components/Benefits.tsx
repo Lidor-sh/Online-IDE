@@ -11,7 +11,7 @@ const Benefits = () => {
           className="text-whitetheme md:max-w-md lg:max-w-2xl"
           title="Experience the Future of Coding Together"
         />
-        <div className="flex flex-warp gap-10 mb-10"></div>
+        <div className="flex flex-warp gap-10 mb-10">{}</div>
       </div>
     </Section>
   );
