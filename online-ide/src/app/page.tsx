@@ -8,18 +8,22 @@ import Image from "next/image";
 import BackgroundImage from "./images/background.jpg";
 import Section from "./components/Section";
 import Hero from "./components/Hero";
+import Benefits from "./components/Benefits";
+import { ScrollParallax } from "react-just-parallax";
+import { useRef } from "react";
 
 export default function Home() {
   const router = useRouter();
-
-  const letStart = () => {
-    router.push("/Login");
-  };
+  const parallaxRef = useRef(null);
 
   return (
-    <div className="relative max-h-full h-screen max-w-full flex-col items-center justify-center overflow-x-hidden">
+    <div
+      ref={parallaxRef}
+      className="relative max-h-full h-full max-w-full flex-col items-center justify-center overflow-x-hidden"
+    >
       <Navbar />
       <Hero />
+      <Benefits />
       <Footer />
     </div>
   );

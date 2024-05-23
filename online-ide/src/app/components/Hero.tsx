@@ -38,7 +38,8 @@ const Hero = () => {
                 width={1024}
                 height={490}
               />
-              <ScrollParallax isAbsolutelyPositioned strength={0.3}>
+
+              <ScrollParallax isAbsolutelyPositioned>
                 <ul className="hidden absolute -left-[5.5rem] bottom-[7.5rem] px-1 py-1 bg-slate-500/40 backdrop-blur border border-slate-700/10 rounded-2xl xl:flex">
                   {heroIcons.map((icon, index) => (
                     <li className="p-5" key={index}>
@@ -48,7 +49,7 @@ const Hero = () => {
                 </ul>
               </ScrollParallax>
 
-              <ScrollParallax isAbsolutelyPositioned strength={0.3}>
+              <ScrollParallax isAbsolutelyPositioned>
                 <Notification
                   className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
                   title="Code submitted"
