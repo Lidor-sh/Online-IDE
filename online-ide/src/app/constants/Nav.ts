@@ -7,8 +7,8 @@ export const navigation = [
   },
   {
     id: "1",
-    title: "About",
-    url: "#about",
+    title: "features",
+    url: "#features",
     onlyMobile: false,
   },
   {

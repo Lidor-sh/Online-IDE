@@ -6,22 +6,27 @@ import { useRef } from "react";
 import { ScrollParallax } from "react-just-parallax";
 import { heroIcons } from "../constants/Hero";
 import Notification from "./Notification";
+import { useRouter } from "next/navigation";
 
 const Hero = () => {
   const parallaxRef = useRef(null);
+  const router = useRouter();
 
   return (
     <Section className="pt-[12rem] -mt-[5.25rem]" id="hero">
       <div className="container-hero relative" ref={parallaxRef}>
         <div className="relative z-1 max-w-[62rem] mx-auto text-center mb-[3.875rem] md:mb-20 lg:mb-[6rem]">
-          <h1 className="h1 mb-6 text-blacktheme">
+          <h1 className="h1 mb-6 font-mono text-blacktheme">
             Collaborate in Real-Time, Code Seamlessly Together!
           </h1>
-          <p className="body-1 z-50 max-w-3xl mx-auto mb-6 text-slate-800 lg:mb-8">
+          <p className="body-1 font-mono z-50 max-w-3xl mx-auto mb-6 text-slate-800 lg:mb-8">
             Join our online IDE and experience effortless teamwork and instant
             updates.
           </p>
-          <button className="bg-blacktheme p-4 rounded-xl text-whitetheme font-mono font-bold">
+          <button
+            onClick={() => router.push("Login?msg=login")}
+            className="bg-blacktheme p-4 rounded-xl text-whitetheme font-mono font-bold"
+          >
             Let{"'"}s Start
           </button>
         </div>
@@ -51,7 +56,7 @@ const Hero = () => {
 
               <ScrollParallax isAbsolutelyPositioned>
                 <Notification
-                  className="hidden absolute -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
+                  className="hidden absolute font-mono -right-[5.5rem] bottom-[11rem] w-[18rem] xl:flex"
                   title="Code submitted"
                 />
               </ScrollParallax>
