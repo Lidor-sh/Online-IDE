@@ -54,14 +54,14 @@ const Navbar = () => {
           } fixed top-[4rem] left-0 right-0 bottom-0 bg-blacktheme/90 lg:static lg:flex lg:mx-auto lg:bg-transparent`}
         >
           <div className="relative z-2 flex flex-col items-center justify-center m-auto lg:flex-row">
-            {navigation.map((item) => {
+            {navigation.map((item, index) => {
               return (
                 <a
                   href={item.url}
                   onClick={() =>
                     item.onlyMobile ? moveToLogin(item.url) : handleClick()
                   }
-                  key={item.id}
+                  key={index}
                   className={`${
                     item.onlyMobile ? "lg:hidden" : ""
                   } block relative font-mono font-extrabold 
