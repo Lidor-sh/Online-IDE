@@ -6,6 +6,9 @@ import Footer from "./components/Footer";
 import Hero from "./components/Hero";
 import Benefits from "./components/Benefits";
 import { useRef } from "react";
+import HowToUse from "./components/HowToUse";
+import Pricing from "./components/Pricing";
+import ContactUs from "./components/ContactUs";
 
 export default function Home() {
   const router = useRouter();
@@ -19,6 +22,9 @@ export default function Home() {
       <Navbar />
       <Hero />
       <Benefits />
+      <HowToUse />
+      <Pricing />
+      <ContactUs />
       <Footer />
     </div>
   );

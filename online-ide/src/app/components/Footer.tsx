@@ -1,12 +1,14 @@
 import Image from "next/image";
 import { socials } from "../constants/Footer";
 import Section from "./Section";
+import Wave from "./Wave";
 
 function Footer() {
   return (
     <Section className="!px-0 !py-3 bg-blacktheme">
-      <hr />
-      <div className="container-footer mb-10 lg:-mt-10 bg-blacktheme flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
+      <Wave className="whitetheme" />
+      <hr className="mt-[10rem]" />
+      <div className="container-section mb-10 lg:-mt-10 bg-blacktheme flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
         <p className="caption text-gray-400">
           © {new Date().getFullYear()}. All rights reserved.
         </p>
