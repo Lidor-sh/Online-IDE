@@ -47,11 +47,11 @@ const ContactUs = () => {
     }));
 
   return (
-    <Section>
+    <Section id="contact-us">
       <Wave className="blacktheme" />
       <div className="container-section mt-[6rem] relative z-2">
         <Heading
-          className="text-blacktheme font-mono md:max-w-md lg:max-w-2xl justify-center text-center"
+          className="text-blacktheme font-bold font-mono md:max-w-md lg:max-w-2xl justify-center text-center"
           title="Contact Us"
         />
         <div className="flex items-center gap-[10rem]">

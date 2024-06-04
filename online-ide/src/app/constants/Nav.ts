@@ -1,7 +1,7 @@
 export const navigation = [
   {
     title: "Home",
-    url: "#home",
+    url: "#hero",
     onlyMobile: false,
   },
   {

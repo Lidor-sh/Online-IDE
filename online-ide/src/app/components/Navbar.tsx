@@ -40,7 +40,7 @@ const Navbar = () => {
       <div className="flex items-center px-5 lg:px-7.5 xl:px-10 max-lg:py-4">
         <a
           className="flex items-center justify-center w-[12rem] xl:mr-8"
-          href="#home"
+          href="#hero"
         >
           <Image src={logo} alt="logo" className="size-11 ml-5" />
           <label className="text-white ml-2 text-xl font-mono font-bold cursor-pointer">
