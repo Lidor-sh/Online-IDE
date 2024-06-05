@@ -1,24 +1,31 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Hero from "./components/Hero";
+import Benefits from "./components/Benefits";
+import { useRef } from "react";
+import HowToUse from "./components/HowToUse";
+import Pricing from "./components/Pricing";
+import ContactUs from "./components/ContactUs";
 
 export default function Home() {
   const router = useRouter();
-
-  const letStart = () => {
-    router.push("/Login");
-  };
+  const parallaxRef = useRef(null);
 
   return (
-    <div className="flex max-h-full h-screen max-w-full flex-col items-center justify-center">
-      <div className="space-y-6">
-        <button
-          className="text-white bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-          onClick={letStart}
-        >
-          Let{"'"}s start!
-        </button>
-      </div>
+    <div
+      ref={parallaxRef}
+      className="relative max-h-full h-full max-w-full flex-col items-center justify-center overflow-x-hidden"
+    >
+      <Navbar />
+      <Hero />
+      <Benefits />
+      <HowToUse />
+      <Pricing />
+      <ContactUs />
+      <Footer />
     </div>
   );
 }

@@ -2,28 +2,7 @@
 
 import { signIn } from "next-auth/react";
 import toast from "react-hot-toast";
-
-const handleSignIn = async (method: string) => {
-  var login;
-  switch (method) {
-    case "google":
-      login = await signIn("google");
-      break;
-    case "github":
-      login = await signIn("github");
-      break;
-    case "discord":
-      login = await signIn("discord");
-      break;
-    case "linkedin":
-      login = await signIn("linkedin");
-      break;
-    case "facebook":
-      login = await signIn("facebook");
-      break;
-  }
-  console.log("Signing in performed");
-};
+import { handleSocialLogin } from "../controllers/loginController";
 
 export function GoogleSignInButton() {
   return (
@@ -31,7 +10,7 @@ export function GoogleSignInButton() {
       type="button"
       className="login-btn w-10 h-10 rounded-full"
       id="google-icon"
-      onClick={() => handleSignIn("google")}
+      onClick={() => handleSocialLogin("google")}
     ></button>
   );
 }
@@ -42,7 +21,7 @@ export function GithubSignInButton() {
       type="button"
       className="login-btn w-10 h-10 rounded-full"
       id="github-icon"
-      onClick={() => handleSignIn("github")}
+      onClick={() => handleSocialLogin("github")}
     ></button>
   );
 }
@@ -53,7 +32,7 @@ export function FacebookSignInButton() {
       type="button"
       className="login-btn w-10 h-10 rounded-full"
       id="facebook-icon"
-      onClick={() => handleSignIn("facebook")}
+      onClick={() => handleSocialLogin("facebook")}
     ></button>
   );
 }
@@ -64,7 +43,7 @@ export function DiscordSignUpButton() {
       type="button"
       className="login-btn w-10 h-10 rounded-full"
       id="discord-icon"
-      onClick={() => handleSignIn("discord")}
+      onClick={() => handleSocialLogin("discord")}
     ></button>
   );
 }
@@ -75,7 +54,7 @@ export function LinkedInSignUpButton() {
       type="button"
       className="login-btn w-10 h-10 rounded-full"
       id="linkedIn-icon"
-      onClick={() => handleSignIn("linkedin")}
+      onClick={() => handleSocialLogin("linkedin")}
     ></button>
   );
 }

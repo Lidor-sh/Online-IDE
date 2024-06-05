@@ -9,6 +9,7 @@ html, body {
   padding: 0;
   box-sizing: border-box;
   background-color: #EEEEEE;
+  scroll-behavior: smooth;
 }
 
 *, *::before, *::after {
@@ -38,7 +39,6 @@ html, body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-color: #EEEEEE; 
 }
 
 .login-container {
@@ -78,13 +78,12 @@ hr {
 }
 
 .login-header, .signup-header {
-  margin-top: -1px;
-  margin-bottom: 20px;
   color: #222831;
   font-family: monospace;
   font-weight: bold;
   font-size: 250%;
   text-align: center;
+  vertical-align: middle;
 }
 
 
@@ -160,7 +159,6 @@ input::placeholder {
 }
 
 .forgot-password {
-  margin-top: 1%;
   font-size: 14px;
   color: #EEEEEE;
   font-family: monospace;
@@ -242,4 +240,75 @@ input::placeholder {
     box-shadow: 0 -1px 0 rgba(0, 0, 0, .04), 0 1px 1px rgba(0, 0, 0, .25);
     cursor: not-allowed;
   }
+}
+
+.wave {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+.wave svg {
+    position: relative;
+    display: block;
+    width: calc(100% + 1.3px);
+    height: 150px;
+}
+
+.wave .shape-fill {
+  @apply fill-current;
+}
+
+.blacktheme .shape-fill {
+  @apply text-blacktheme;
+}
+
+.whitetheme .shape-fill {
+  @apply text-whitetheme
+}
+
+.h1 {
+  @apply font-semibold text-[2.5rem] leading-[3.25rem] md:text-[2.75rem] md:leading-[3.75rem] lg:text-[3.25rem] lg:leading-[4.0625rem] xl:text-[3.75rem] xl:leading-[4.5rem]
+}
+
+.h2 {
+  @apply text-[1.75rem] leading-[2.5rem] md:text-[2rem] md:leading-[2.5rem] lg:text-[2.5rem] lg:leading-[3.5rem] xl:text-[3rem] xl:leading-tight
+}
+
+.h3 {
+  @apply text-[2rem] leading-normal md:text-[2.5rem]
+}
+
+.h4 {
+  @apply text-[2rem] leading-normal
+}
+
+.h5 {
+  @apply text-2xl leading-normal
+}
+
+.container-hero {
+  @apply container max-w-[77.5rem] mx-auto px-5 md:px-10 lg:px-15 xl:max-w-[87.5rem]
+}
+
+.container-section {
+  @apply max-w-[77.5rem] mx-auto px-5 md:px-10 lg:px-15 xl:max-w-[87.5rem]
+}
+.body-1 {
+  @apply text-[0.875rem] leading-[1.5rem] md:text-[1rem] md:leading-[1.75rem] lg:text-[1.25rem] lg:leading-8
+}
+
+.body-2 {
+  @apply font-light text-[0.875rem] leading-6 md:text-base
+}
+
+.caption {
+  @apply text-sm
+}
+
+.tagline {
+  @apply font-grotesk font-light text-xs tracking-wider uppercase
 }

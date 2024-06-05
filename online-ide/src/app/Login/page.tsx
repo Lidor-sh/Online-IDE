@@ -1,72 +1,60 @@
 "use client";
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import backImage from "../images/background2.jpg";
-import { signIn, useSession } from "next-auth/react";
+import returnImage from "../images/return-icon.png";
+import { useSession } from "next-auth/react";
 import {
   GithubSignInButton,
   GoogleSignInButton,
   DiscordSignUpButton,
-  LinkedInSignUpButton,
   FacebookSignInButton,
 } from "../components/authButtons";
-import { redirect } from "next/navigation";
-import { PassThrough } from "stream";
 import toast from "react-hot-toast";
+import { signInCred, signUpCred } from "../controllers/loginController";
+import { useRouter } from "next/navigation";
 
 const Page = () => {
   const [currentPage, setCurrentPage] = useState("Login");
   const [currActive, setCurrentActive] = useState("Login");
+  const [hasShownAlert, setHasShownAlert] = useState(false);
   const { data: session } = useSession();
+  const router = useRouter();
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    if (searchParams.get("error") === "AccessDenied" && !hasShownAlert) {
+      toast.error("This email is used in another login method");
+      setHasShownAlert(true);
+    }
+    if (searchParams.get("msg") === "signup") {
+      setCurrentActive("SignUp");
+      setCurrentPage("SignUp");
+    }
+  }, [hasShownAlert]);
 
   if (session) {
     console.log("Signed in as ", session);
-    redirect("../Projects/");
+    router.push("/Projects/");
   } else {
     console.log("Not signed in", session);
   }
 
-  const signUpCred = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fromData = new FormData(e.currentTarget);
-    const signUpData = {
-      username: fromData.get("username"),
-      email: fromData.get("email"),
-      password: fromData.get("password"),
-    };
-
-    // TODO: check if user is already signed
-
-    // TODO: if user is already signed perform an error
-
-    // TODO: if user is not signed, sign him up and than sign him in
-
-    // if user.exists() ? throw error : user.signup and signin()
-  };
-
-  const signInCred = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const fromData = new FormData(e.currentTarget);
-    const loginData = {
-      email: fromData.get("email"),
-      password: fromData.get("password"),
-      callbackUrl: "/",
-      redirect: false,
-    };
-    const login = await signIn("credentials", loginData);
-
-    console.log(login);
-
-    if (login && login.ok) {
-      toast.success("Login successful");
-    } else {
-      toast.error("Wrong email or password");
-    }
+  const goToHome = () => {
+    router.push("/");
   };
 
   const LoginPage = () => (
     <div className="login-container">
-      <h2 className="login-header">Sign in</h2>
+      <div className="flex items-center justify-center mb-5">
+        <button
+          className="flex items-center justify-center h-full"
+          onClick={goToHome}
+        >
+          <Image src={returnImage} alt="background" className="size-9" />
+        </button>
+        <h2 className="login-header flex-1">Sign in</h2>
+      </div>
       <form className="form space-y-2" onSubmit={signInCred}>
         <div className="form-group">
           <input
@@ -133,8 +121,16 @@ const Page = () => {
 
   const SignUpPage = () => (
     <div className="signup-container">
-      <h2 className="signup-header">Sign up</h2>
-      <form className="form space-y-2">
+      <div className="flex items-center justify-center mb-5">
+        <button
+          className="flex items-center justify-center h-full"
+          onClick={goToHome}
+        >
+          <Image src={returnImage} alt="background" className="size-9" />
+        </button>
+        <h2 className="signup-header flex-1">Sign up</h2>
+      </div>
+      <form className="form space-y-2" onSubmit={signUpCred}>
         <div className="form-group">
           <input
             name="username"
