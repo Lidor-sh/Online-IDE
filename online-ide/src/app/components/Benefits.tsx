@@ -14,7 +14,7 @@ const Benefits = () => {
   return (
     <Section className="bg-blacktheme" id="features">
       <Wave className="z-3 whitetheme" />
-      <div className="container-section mt-[6rem] relative z-2 bg-blacktheme">
+      <div className="container-section mt-[6.5rem] relative z-2 bg-blacktheme">
         <Heading
           className="text-whitetheme font-mono md:max-w-md lg:max-w-2xl justify-center text-center"
           title="Experience the Future of Coding Together"
