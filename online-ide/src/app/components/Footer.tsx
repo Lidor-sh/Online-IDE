@@ -3,13 +3,30 @@ import { socials } from "../constants/Footer";
 import Section from "./Section";
 import Wave from "./Wave";
 
-function Footer() {
+interface footerProps {
+  wave?: boolean;
+  blackTheme?: boolean;
+}
+
+function Footer({ wave, blackTheme }: footerProps) {
   return (
-    <Section className="!px-0 !py-3 bg-blacktheme">
-      <Wave className="whitetheme" />
-      <hr className="mt-[10rem]" />
-      <div className="container-section mb-10 lg:-mt-10 bg-blacktheme flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col">
-        <p className="caption text-gray-400">
+    <Section className={`!px-0 !py-3 ${blackTheme && "bg-blacktheme"}`}>
+      {wave && <Wave className="whitetheme" />}
+      <hr
+        className={`${wave ? "mt-[10rem]" : ""} ${
+          !blackTheme && "border-gray-700"
+        }`}
+      />
+      <div
+        className={`container-section mb-10 lg:-mt-10 ${
+          blackTheme && "bg-blacktheme"
+        } flex sm:justify-between justify-center items-center gap-10 max-sm:flex-col`}
+      >
+        <p
+          className={`caption ${
+            blackTheme ? "text-gray-200" : "text-gray-700"
+          }`}
+        >
           © {new Date().getFullYear()}. All rights reserved.
         </p>
 

@@ -25,7 +25,7 @@ export default function Home() {
       <HowToUse />
       <Pricing />
       <ContactUs />
-      <Footer />
+      <Footer wave blackTheme />
     </div>
   );
 }
