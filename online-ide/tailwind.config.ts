@@ -13,6 +13,17 @@ const config: Config = {
         blacktheme: "#222831",
         whitetheme: "#EEEEEE",
         middletheme: "#76ABAE",
+        langbg: {
+          javascript: "#F49C9C",
+          python: "#9CF4BA",
+        },
+        langtext: {
+          javascript: "#BA4E4E",
+          python: "#50BA4E",
+        },
+        desctext: "#9CA3AF",
+        contribbg: "#D9D9D9",
+        contribtext: "#989898",
       },
       fontFamily: {
         code: "var(--font-code)",
@@ -40,6 +51,7 @@ const config: Config = {
   plugins: [
     require("@tailwindcss/forms"),
     require("@tailwindcss/typography"),
+    require("@tailwindcss/line-clamp"),
     require("daisyui"),
   ],
 };

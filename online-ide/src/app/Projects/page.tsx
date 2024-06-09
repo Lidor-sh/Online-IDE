@@ -1,10 +1,11 @@
 "use client";
 
-import { signOut, useSession } from "next-auth/react";
-import Image from "next/image";
+import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef } from "react";
 import Footer from "../components/Footer";
+import ProjectCard from "../components/ProjectCard";
+import projectImage from "../images/notification-main.png";
 
 export default function Page() {
   const { data: session } = useSession();
@@ -24,25 +25,23 @@ export default function Page() {
   return (
     <>
       <div className="relative min-h-screen max-h-full h-full max-w-full flex-col items-center justify-center overflow-x-hidden bg-whitetheme">
-        {/**<div className="flex items-center justify-center h-full w-full space-x-10">
-          <Image
-            src={session.user?.image ? session.user?.image : "../favicon.ico"}
-            width={100}
-            height={100}
-            className="rounded-full w-10"
-            alt=""
+        <div className="flex flex-wrap gap-20 mt-32 ml-20">
+          <ProjectCard
+            image={projectImage}
+            projectName="Project Name"
+            desc="Description of the project and its suppose to show only up to three lines and if its more than 3 lines so its suppose to show dots"
+            lang="javascript"
+            numOfContributors={15}
           />
-          <div className="text-gray-950 font-mono">
-            Hi {session.user?.name}! your email address is:{" "}
-            {session.user?.email}
-          </div>
-          <button
-            className="text-white z-50 bg-gray-800 hover:bg-gray-900 focus:outline-none focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:hover:bg-gray-700 dark:focus:ring-gray-700 dark:border-gray-700"
-            onClick={() => signOut()}
-          >
-            Sign Out
-          </button>
-        </div>*/}
+          <ProjectCard
+            image={projectImage}
+            projectName="Snake"
+            desc="The Python Snake Game project involves creating a classic Snake game using the Pygame library. Players control a snake to eat food, growing longer with each item consumed, while avoiding collisions with the walls and the snake's own body. This project helps in learning basic game development, including handling graphics, user inputs, and game logic."
+            lang="python"
+            numOfContributors={9}
+          />
+          <ProjectCard />
+        </div>
         <div className="fixed left-0 bottom-0 w-full bg-whitetheme">
           <Footer />
         </div>
