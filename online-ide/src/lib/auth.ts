@@ -4,7 +4,7 @@ import DiscordProvider from "next-auth/providers/discord";
 import CredentialsProvider from "next-auth/providers/credentials";
 import FacebookProvider from "next-auth/providers/facebook";
 import { fetchUser, updateUser } from "./actions/user.action";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { STATUS_CODES } from "http";
 
 export const authOptions = {

@@ -2,7 +2,7 @@
 
 import User from "../models/user.model";
 import { connectToDB } from "../mogoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 interface Params {
   username: string;

@@ -6,6 +6,8 @@ import { useEffect, useRef } from "react";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import projectImage from "../images/notification-main.png";
+import Image from "next/image";
+import defImage from "../images/robot.jpg"
 
 export default function Page() {
   const { data: session } = useSession();
@@ -25,6 +27,18 @@ export default function Page() {
   return (
     <>
       <div className="relative min-h-screen max-h-full h-full max-w-full flex-col items-center justify-center overflow-x-hidden bg-whitetheme">
+        <div className="flex max-w-full bg-blacktheme h-20 items-center" >
+            <Image 
+            className="ml-5 size-13 rounded-full border-whitetheme border-2"
+            src={defImage}
+            width={30}
+            height={30}
+            alt="profile image"
+            />
+            <p className="ml-4 text-whitetheme font-mono text-lg">
+              Hello, {session.user?.name}
+            </p>
+        </div>
         <div className="flex flex-wrap gap-20 mt-32 ml-20">
           <ProjectCard
             image={projectImage}
