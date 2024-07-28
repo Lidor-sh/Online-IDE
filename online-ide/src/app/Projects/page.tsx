@@ -103,7 +103,7 @@ export default function Page() {
             numOfContributors={9}
           />
         </div>
-        <div className="fixed left-0 bottom-0 w-full bg-whitetheme">
+        <div className="left-0 bottom-0 w-full bg-whitetheme">
           <Footer />
         </div>
       </div>
