@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import { notificationImages } from "../constants/Hero";
+import { MouseEventHandler } from "react";
+import { on } from "events";
 
 interface cardProps {
   image?: string | StaticImageData;
@@ -7,6 +9,7 @@ interface cardProps {
   projectName?: string;
   desc?: string;
   numOfContributors?: number;
+  onClick?: MouseEventHandler<HTMLDivElement>;
 }
 
 const langBg: Record<string, string> = {
@@ -25,10 +28,11 @@ const ProjectCard = ({
   projectName,
   desc,
   numOfContributors,
+  onClick
 }: cardProps) => {
   if (image && lang && projectName && desc && numOfContributors) {
     return (
-      <div className="flex flex-col bg-blacktheme w-[380px] h-[196px] rounded-[12px]">
+      <div onClick={onClick} className="flex flex-col bg-blacktheme w-[380px] h-[196px] rounded-[12px]">
         <div className="pt-[0.5rem] pl-5">
           <h5 className="h5 text-[25px] font-mono font-bold text-whitetheme">
             {projectName}
@@ -90,7 +94,7 @@ const ProjectCard = ({
     );
   } else {
     return (
-      <div className="flex justify-center items-center shadow-md border-[3px] border-dotted border-contribtext bg-transparent w-[380px] h-[196px] rounded-[12px]">
+      <div onClick={onClick} className="flex justify-center items-center shadow-md border-[3px] border-dotted border-contribtext bg-transparent w-[380px] h-[196px] rounded-[12px]">
         <div className="flex flex-col justify-center items-center">
           <div className="flex justify-center items-center rounded-full border-[3px] w-[66px] h-[66px] border-dotted border-contribtext ">
             <p className="text-contribtext font-mono text-[40px] text-center mb-1">

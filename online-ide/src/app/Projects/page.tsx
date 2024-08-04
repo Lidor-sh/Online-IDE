@@ -2,7 +2,7 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import projectImage from "../images/notification-main.png";
@@ -11,11 +11,13 @@ import defImage from "../images/robot.jpg";
 import SpotifyCard from "../components/SpotifyCard";
 import songImage from "../images/bealright.jpeg";
 import emailImage from "../images/email.png";
+import CreateProjectPanel from "../components/CreateProjectPanel";
 
 export default function Page() {
   const { data: session } = useSession();
   const router = useRouter();
-  const parallaxRef = useRef(null);
+  const [ isBlur, setisBlur ] = useState(false);
+  const [ isCreatingProject, setIsCreatingProject ] = useState(false);
 
   useEffect(() => {
     if (!session) {
@@ -27,9 +29,14 @@ export default function Page() {
     return null; // You can also show a loading spinner or a message here
   }
 
+  const createProject = () => {
+    setisBlur(true);
+    setIsCreatingProject(true);
+  };
+  //black blur
   return (
-    <>
-      <div className="relative min-h-screen max-h-full h-full max-w-full flex-col items-center justify-center overflow-x-hidden bg-whitetheme">
+    <> 
+      <div className={`relative min-h-screen max-h-full h-full max-w-full ${isBlur ? "blur-container" : ""} flex-col items-center justify-center overflow-x-hidden bg-whitetheme`}>
         <div className="flex max-w-full bg-blacktheme h-20 items-center">
           <Image
             className="ml-5 size-13 rounded-full border-whitetheme border-2"
@@ -68,7 +75,7 @@ export default function Page() {
             lang="python"
             numOfContributors={9}
           />
-          <ProjectCard />
+          <ProjectCard onClick={createProject}/>
         </div>
         <div className="flex items-center mt-6 ml-24">
           <h5 className="text-black font-mono  text-[3rem] font-bold">
@@ -106,6 +113,14 @@ export default function Page() {
         <div className="left-0 bottom-0 w-full bg-whitetheme">
           <Footer />
         </div>
+        {isBlur && (
+        <div className="blur-effect" />
+        )}
+        {isCreatingProject && ( //create panel component for creating new project and cancel button
+          <CreateProjectPanel 
+          setIsCreatingProject={setIsCreatingProject}
+          setisBlur={setisBlur} />
+        )}
       </div>
     </>
   );
