@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const projectScheme = new mongoose.Schema({
-    name: { type: String, require: true},
-    desc: { type: String, require: true},
-    lang: { type: String, require: true},
+    name: { type: String, required: true},
+    desc: { type: String, required: true},
+    lang: { type: String, required: true},
     owner: { type: String },
     users: [{ type: String }],
     image: { type: String }

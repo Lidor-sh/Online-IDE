@@ -1,5 +1,5 @@
-import { log } from "console";
-import { set } from "mongoose";
+import { createProject } from "@/lib/actions/project.action";
+import { useSession } from "next-auth/react";
 import { useState } from "react";
 
 interface promps {
@@ -10,6 +10,7 @@ interface promps {
 const langs = ["javascript", "python"];
 
 function CreateProjectPanel({ setisBlur, setIsCreatingProject }: promps) {
+  const { data: session } = useSession();
   const [image, setImage] = useState<string>("");
   const [projectName, setProjectName] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
@@ -28,7 +29,7 @@ function CreateProjectPanel({ setisBlur, setIsCreatingProject }: promps) {
     setLang("Choose a language");
   };
 
-  const handleCreate = () => {
+  const handleCreate = async () => {
     console.log(image, projectName, desc, lang);
     const error1 =
       image === "" ||
@@ -42,10 +43,29 @@ function CreateProjectPanel({ setisBlur, setIsCreatingProject }: promps) {
     setProjectNameError(error2);
     setLangError(error3);
     setDescError(error4);
-    console.log(imageError, projectNameError, descError, langError);
-    if (!error1 && !error2 && !error3 && !error4) {
+    console.log(error1, error2, error3, error4);
+    if (!error1 && !error2 && !error3 && !error4 && session?.user?.email) {
       //create project
-      handleExit();
+      try {
+        const response = await fetch('/api/projects', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            name: projectName,
+            desc: desc,
+            lang: lang,
+            owner: session.user.email,
+            users: [session.user.email],
+            image: image,
+          }),
+        });
+        if (!response.ok) throw new Error('Failed to create project');
+        handleExit();
+      } catch (error) {
+        console.error('Error creating project:', error);
+      }
     }
   };
   return (

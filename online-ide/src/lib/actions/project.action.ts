@@ -4,14 +4,14 @@ import { StaticImageData } from "next/image"
 import Project from "../models/project.model"
 import { connectToDB } from "../mogoose"
 
-interface projectParams {
+export interface projectParams {
     id?: string,
     data: {
         name: string,
         desc: string,
         lang: string,
         owner: string,
-        users: [string],
+        users: string[],
         image: string | StaticImageData
     }
 }
@@ -19,9 +19,19 @@ interface projectParams {
 export async function createProject({
     data
 }: projectParams) : Promise<void> {
+    console.log(data);
     connectToDB();
+    console.log("Connected to MongoDB");
     try {
-        const newProject = new Project(data);
+        const newProject = new Project({
+            name: data.name,
+            desc: data.desc,
+            lang: data.lang,
+            owner: data.owner,
+            users: data.users,
+            image: data.image
+          });
+        console.log("New project:", newProject);
         await newProject.save();
         console.log("Project created with ID:", newProject._id);
         return newProject;
