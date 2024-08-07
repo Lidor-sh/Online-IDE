@@ -28,17 +28,20 @@ const ProjectCard = ({
   projectName,
   desc,
   numOfContributors,
-  onClick
+  onClick,
 }: cardProps) => {
   if (image && lang && projectName && desc && numOfContributors) {
     return (
-      <div onClick={onClick} className="flex flex-col bg-blacktheme w-[380px] h-[196px] rounded-[12px]">
+      <div
+        onClick={onClick}
+        className="flex flex-col bg-blacktheme w-[380px] h-[196px] rounded-[12px]"
+      >
         <div className="pt-[0.5rem] pl-5">
           <h5 className="h5 text-[25px] font-mono font-bold text-whitetheme">
             {projectName}
           </h5>
         </div>
-        <p className="pl-5 pr-16 mt-1 font-mono text-[16px] font-bold text-desctext line-clamp-3">
+        <p className="pl-5 pr-16 mt-1 font-mono text-[16px] font-bold text-desctext line-clamp-3 h-[35%]">
           {desc}
         </p>
         <div className="flex justify-between mt-3 px-5 items-end">
@@ -94,7 +97,10 @@ const ProjectCard = ({
     );
   } else {
     return (
-      <div onClick={onClick} className="flex justify-center items-center shadow-md border-[3px] border-dotted border-contribtext bg-transparent w-[380px] h-[196px] rounded-[12px]">
+      <div
+        onClick={onClick}
+        className="flex justify-center items-center shadow-md border-[3px] border-dotted border-contribtext bg-transparent w-[380px] h-[196px] rounded-[12px]"
+      >
         <div className="flex flex-col justify-center items-center">
           <div className="flex justify-center items-center rounded-full border-[3px] w-[66px] h-[66px] border-dotted border-contribtext ">
             <p className="text-contribtext font-mono text-[40px] text-center mb-1">

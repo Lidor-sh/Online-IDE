@@ -6,24 +6,69 @@ import { useEffect, useRef, useState } from "react";
 import Footer from "../components/Footer";
 import ProjectCard from "../components/ProjectCard";
 import projectImage from "../images/notification-main.png";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
 import defImage from "../images/robot.jpg";
 import SpotifyCard from "../components/SpotifyCard";
 import songImage from "../images/bealright.jpeg";
 import emailImage from "../images/email.png";
 import CreateProjectPanel from "../components/CreateProjectPanel";
+import { ProjectProps } from "../api/projects/route";
+interface Project {
+  image: string | StaticImageData;
+  lang: string;
+  projectName: string;
+  desc: string;
+  owner: string;
+  users: string[];
+}
 
 export default function Page() {
   const { data: session } = useSession();
   const router = useRouter();
-  const [ isBlur, setisBlur ] = useState(false);
-  const [ isCreatingProject, setIsCreatingProject ] = useState(false);
+  const [isBlur, setisBlur] = useState(false);
+  const [isCreatingProject, setIsCreatingProject] = useState(false);
+  const [ownerProjects, setOwnerProjects] = useState<Project[]>();
+  const [userProjects, setUserProjects] = useState<Project[]>();
+  const isLoaded = useRef(false);
 
   useEffect(() => {
     if (!session) {
       router.push("../Login");
     }
   }, [session, router]);
+
+  useEffect(() => {
+    if (!isLoaded.current && session?.user?.email) {
+      loadProjects(session.user.email);
+      isLoaded.current = true;
+    }
+  }, []);
+
+  const loadProjects = async (email: string) => {
+    try {
+      const ownerResponse = await fetch(`/api/projects?owner=${email}`);
+      const userResponse = await fetch(`/api/projects?user=${email}`);
+      if (ownerResponse.ok && userResponse.ok) {
+        const ownerData = await ownerResponse.json();
+        const userData = await userResponse.json();
+        setOwnerProjects(ownerData);
+        setUserProjects(userData);
+        console.log("Owner Projects:", ownerData);
+        console.log("User Projects:", userData);
+        return true;
+      } else {
+        console.error(
+          "Failed to load projects:",
+          ownerResponse.statusText,
+          userResponse.statusText
+        );
+        return false;
+      }
+    } catch (error) {
+      console.error("Error loading projects:", error);
+      return false;
+    }
+  };
 
   if (!session) {
     return null; // You can also show a loading spinner or a message here
@@ -35,8 +80,12 @@ export default function Page() {
   };
   //black blur
   return (
-    <> 
-      <div className={`relative min-h-screen max-h-full h-full max-w-full ${isBlur ? "blur-container" : ""} flex-col items-center justify-center overflow-x-hidden bg-whitetheme`}>
+    <>
+      <div
+        className={`relative min-h-screen max-h-full h-full max-w-full ${
+          isBlur ? "blur-container" : ""
+        } flex-col items-center justify-center overflow-x-hidden bg-whitetheme`}
+      >
         <div className="flex max-w-full bg-blacktheme h-20 items-center">
           <Image
             className="ml-5 size-13 rounded-full border-whitetheme border-2"
@@ -61,21 +110,18 @@ export default function Page() {
           My Projects
         </h5>
         <div className="flex flex-wrap gap-20 mt-6 ml-20">
-          <ProjectCard
-            image={projectImage}
-            projectName="Project Name"
-            desc="Description of the project and its suppose to show only up to three lines and if its more than 3 lines so its suppose to show dots"
-            lang="javascript"
-            numOfContributors={15}
-          />
-          <ProjectCard
-            image={projectImage}
-            projectName="Snake"
-            desc="The Python Snake Game project involves creating a classic Snake game using the Pygame library. Players control a snake to eat food, growing longer with each item consumed, while avoiding collisions with the walls and the snake's own body. This project helps in learning basic game development, including handling graphics, user inputs, and game logic."
-            lang="python"
-            numOfContributors={9}
-          />
-          <ProjectCard onClick={createProject}/>
+          {ownerProjects &&
+            ownerProjects.map((project: any) => (
+              <ProjectCard
+                key={project.projectName}
+                image={projectImage}
+                lang={project.lang}
+                projectName={project.name}
+                desc={project.desc}
+                numOfContributors={project.users.length}
+              />
+            ))}
+          <ProjectCard onClick={createProject} />
         </div>
         <div className="flex items-center mt-6 ml-24">
           <h5 className="text-black font-mono  text-[3rem] font-bold">
@@ -95,31 +141,27 @@ export default function Page() {
           </div>
         </div>
         <div className="flex flex-wrap gap-20 mt-6 ml-20">
-          <ProjectCard
-            image={projectImage}
-            projectName="Project Name"
-            desc="Description of the project and its suppose to show only up to three lines and if its more than 3 lines so its suppose to show dots"
-            lang="javascript"
-            numOfContributors={15}
-          />
-          <ProjectCard
-            image={projectImage}
-            projectName="Snake"
-            desc="The Python Snake Game project involves creating a classic Snake game using the Pygame library. Players control a snake to eat food, growing longer with each item consumed, while avoiding collisions with the walls and the snake's own body. This project helps in learning basic game development, including handling graphics, user inputs, and game logic."
-            lang="python"
-            numOfContributors={9}
-          />
+          {userProjects &&
+            userProjects.map((project: any) => (
+              <ProjectCard
+                key={project.projectName}
+                image={projectImage}
+                lang={project.lang}
+                projectName={project.name}
+                desc={project.desc}
+                numOfContributors={project.users.length}
+              />
+            ))}
         </div>
         <div className="left-0 bottom-0 w-full bg-whitetheme">
           <Footer />
         </div>
-        {isBlur && (
-        <div className="blur-effect" />
-        )}
+        {isBlur && <div className="blur-effect" />}
         {isCreatingProject && ( //create panel component for creating new project and cancel button
-          <CreateProjectPanel 
-          setIsCreatingProject={setIsCreatingProject}
-          setisBlur={setisBlur} />
+          <CreateProjectPanel
+            setIsCreatingProject={setIsCreatingProject}
+            setisBlur={setisBlur}
+          />
         )}
       </div>
     </>

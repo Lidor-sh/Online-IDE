@@ -1,6 +1,6 @@
 import { createProject } from "@/lib/actions/project.action";
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 interface promps {
   setisBlur: React.Dispatch<React.SetStateAction<boolean>>;
@@ -45,12 +45,11 @@ function CreateProjectPanel({ setisBlur, setIsCreatingProject }: promps) {
     setDescError(error4);
     console.log(error1, error2, error3, error4);
     if (!error1 && !error2 && !error3 && !error4 && session?.user?.email) {
-      //create project
       try {
-        const response = await fetch('/api/projects', {
-          method: 'POST',
+        const response = await fetch("/api/projects", {
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({
             name: projectName,
@@ -61,10 +60,10 @@ function CreateProjectPanel({ setisBlur, setIsCreatingProject }: promps) {
             image: image,
           }),
         });
-        if (!response.ok) throw new Error('Failed to create project');
+        if (!response.ok) throw new Error("Failed to create project");
         handleExit();
       } catch (error) {
-        console.error('Error creating project:', error);
+        console.error("Error creating project:", error);
       }
     }
   };
