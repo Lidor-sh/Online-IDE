@@ -74,6 +74,10 @@ export default function Page() {
     return null; // You can also show a loading spinner or a message here
   }
 
+  const moveToEditor = (id: string) => {
+    router.push(`/Editor?id=${encodeURIComponent(id)}`);
+  };
+
   const createProject = () => {
     setisBlur(true);
     setIsCreatingProject(true);
@@ -113,12 +117,13 @@ export default function Page() {
           {ownerProjects &&
             ownerProjects.map((project: any) => (
               <ProjectCard
-                key={project.projectName}
+                key={project._id}
                 image={projectImage}
                 lang={project.lang}
                 projectName={project.name}
                 desc={project.desc}
-                numOfContributors={project.users.length}
+                numOfContributors={project.users.length + 3}
+                onClick={() => moveToEditor(project._id)}
               />
             ))}
           <ProjectCard onClick={createProject} />
@@ -149,7 +154,8 @@ export default function Page() {
                 lang={project.lang}
                 projectName={project.name}
                 desc={project.desc}
-                numOfContributors={project.users.length}
+                numOfContributors={project.users.length + 3}
+                onClick={() => moveToEditor(project._id)}
               />
             ))}
         </div>
@@ -157,7 +163,7 @@ export default function Page() {
           <Footer />
         </div>
         {isBlur && <div className="blur-effect" />}
-        {isCreatingProject && ( //create panel component for creating new project and cancel button
+        {isCreatingProject && (
           <CreateProjectPanel
             setIsCreatingProject={setIsCreatingProject}
             setisBlur={setisBlur}
